@@ -1,4 +1,3 @@
-
 #info #score {
     position: relative;
     display: block;
@@ -12,11 +11,11 @@
 }
 
 #info #score #score-red {
-  color: #B32728;
+    color: #B32728;
 }
 
 #info #score #score-blue {
-  color: #11779F;
+    color: #11779F;
 }
 
 #info #turn {
@@ -29,16 +28,16 @@
 }
 
 #info .red {
-  color: #B32728 !important;
+    color: #B32728 !important;
 }
 
 #info .blue {
-  color: #11779F !important;
+    color: #11779F !important;
 }
 
 #info #clue-display {
-  display: block;
-  line-height: 1.2;
+    display: block;
+    line-height: 1.2;
 }
 
 #info #end-turn {
@@ -53,59 +52,66 @@
 }
 
 #info #end-turn:hover {
-  background: #686c6d;
+    background: #686c6d;
 }
 
 #info #end-turn:disabled {
-  background: #323032;
-  border: 2px solid #686c6d;
-  color: #686c6d;
-  cursor: default;
+    background: #323032;
+    border: 2px solid #686c6d;
+    color: #686c6d;
+    cursor: default;
 }
 
 #clue-form {
-  text-align: center;
+    text-align: center;
 }
 
-#clue-form #clue-word, #clue-form #clue-count, #clue-form #declare-clue {
-  font-size: 16px;
-  background: #323032;
-  border: 2px solid #F8FDFF;
-  color: #F8FDFF;
-  text-decoration: none;
+#clue-form #clue-word,
+#clue-form #clue-count,
+#clue-form #declare-clue {
+    font-size: 16px;
+    background: #323032;
+    border: 2px solid #F8FDFF;
+    color: #F8FDFF;
+    text-decoration: none;
+    height: 36px;
+    vertical-align: top;
+    border-radius: 3px;
+    outline: none;
+    padding: 0 5px;
 }
 
 #clue-form #declare-clue {
-  width: 19%;
+    width: 19%;
 }
 
 #clue-form #declare-clue:hover {
-  background: #686c6d;
+    background: #686c6d;
 }
 
 #clue-form #declare-clue:disabled {
-  background: #323032;
-  border: 2px solid #686c6d;
-  color: #686c6d;
-  cursor: default;
+    background: #323032;
+    border: 2px solid #686c6d;
+    color: #686c6d;
+    cursor: default;
 }
 
 #board {
-  position: relative;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  font-size: 0;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
 }
 
 #board .row {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
-#board .row .tile{
+#board .row .tile {
     position: relative;
     display: inline-block;
     width: 19%;
@@ -120,38 +126,38 @@
     outline: none;
 }
 
-#board .row .tile:hover{
-  border-color: #323032;
+#board .row .tile:hover {
+    border-color: #323032;
 }
 
 #board .s {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 #board .s.r {
-  color: #B32728;
-  background: rgb(236, 170, 170);
-  border-color: rgb(236, 170, 170);
+    color: #B32728;
+    background: rgb(236, 170, 170);
+    border-color: rgb(236, 170, 170);
 }
 
 #board .s.b {
-  color: #11779F;
-  background: rgb(168, 216, 235);
-  border-color: rgb(168, 216, 235);
+    color: #11779F;
+    background: rgb(168, 216, 235);
+    border-color: rgb(168, 216, 235);
 }
 
 #board .s.d {
-  background: #686c6d;
-  border-color: #686c6d;
+    background: #686c6d;
+    border-color: #686c6d;
 }
 
 #board .s.d.h {
-  background: #F8FDFF;
-  border-color: #F8FDFF;
+    background: #F8FDFF;
+    border-color: #F8FDFF;
 }
 
 #board .s.d.h:hover {
-  border-color: #323032;
+    border-color: #323032;
 }
 
 #board .flipped.n {
@@ -161,61 +167,61 @@
 }
 
 #board .flipped.r {
-  border-color: #B32728;
-  background: #B32728;
-  color: #F8FDFF;
+    border-color: #B32728;
+    background: #B32728;
+    color: #F8FDFF;
 }
 
 #board .flipped.b {
-  border-color: #11779F;
-  background: #11779F;
-  color: #F8FDFF;
+    border-color: #11779F;
+    background: #11779F;
+    color: #F8FDFF;
 }
 
 #board .flipped.d {
-  border-color: #000000;
-  background: #000000;
-  color: #F8FDFF;
+    border-color: #000000;
+    background: #000000;
+    color: #F8FDFF;
 }
 
 #board .tile.proposed {
-  border-color: #cead00;
+    border-color: #cead00;
 }
 
 #board .tile.proposed:hover {
-  border-color: #8a7400;
+    border-color: #8a7400;
 }
 
 
 #toggles {
-  position: relative;
-  font-size: 0;
-  width: 100%;
-  margin-top: 20px;
+    position: relative;
+    font-size: 0;
+    width: 100%;
+    margin-top: 20px;
 }
 
 #toggles .toggle {
-  position: relative;
-  width: 19%;
-  float: left;
-  margin: 0.5%;
+    position: relative;
+    width: 19%;
+    float: left;
+    margin: 0.5%;
 }
 
 #toggles #new-game {
-  position: relative;
-  width: 19%;
-  right: 0;
-  float: right;
-  margin: 0.5%;
-  font-size: 16px;
-  background: #323032;
-  border: 2px solid #F8FDFF;
-  color: #F8FDFF;
-  text-decoration: none;
+    position: relative;
+    width: 19%;
+    right: 0;
+    float: right;
+    margin: 0.5%;
+    font-size: 16px;
+    background: #323032;
+    border: 2px solid #F8FDFF;
+    color: #F8FDFF;
+    text-decoration: none;
 }
 
 #toggles #new-game:hover {
-  background: #686c6d;
+    background: #686c6d;
 }
 
 #toggles .toggle button {
@@ -255,32 +261,32 @@
 }
 
 #toggles #player-difficulty {
-  display: none;
+    display: none;
 }
 
 #log {
-  clear: both;
+    clear: both;
 }
 
 #log::before {
-  clear: both;
-  content: "GAME LOG (newest first):";
-  color: #F8FDFF;
-  font-weight: bold;
+    clear: both;
+    content: "GAME LOG (newest first):";
+    color: #F8FDFF;
+    font-weight: bold;
 }
 
 #log span {
-  display: list-item;
+    display: list-item;
 }
 
 #log .red {
-  color: #B32728;
+    color: #B32728;
 }
 
 #log .blue {
-  color: #11779F;
+    color: #11779F;
 }
 
 #log .declareClue {
-  font-weight: bold;
+    font-weight: bold;
 }
