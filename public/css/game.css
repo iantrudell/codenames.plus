@@ -24,7 +24,7 @@
     text-align: center;
     color: #F8FDFF;
     flex-grow: 1;
-    line-height: 36px;
+    line-height: 42px;
 }
 
 #info .red {
@@ -49,6 +49,7 @@
     color: #F8FDFF;
     text-decoration: none;
     flex-grow: 0;
+    margin-top: 22px;
 }
 
 #info #end-turn:hover {
@@ -64,6 +65,9 @@
 
 #clue-form {
     text-align: center;
+    margin-top: -52px;
+    z-index: 2;
+    position: relative;
 }
 
 #clue-form #clue-word,
@@ -115,7 +119,7 @@
     position: relative;
     display: inline-block;
     width: 19%;
-    height: 140px;
+    height: 130px;
     margin: 0.5%;
     padding: 0;
     box-sizing: border-box;
@@ -264,15 +268,17 @@
     display: none;
 }
 
-#log {
-    clear: both;
+#log_wrapper {
+    width: 250px;
+    float: right;
+    margin-left: 50px;
+    margin-top: 95px;
 }
 
-#log::before {
-    clear: both;
-    content: "GAME LOG (newest first):";
+#log_wrapper h2 {
     color: #F8FDFF;
-    font-weight: bold;
+    margin: 0;
+    font-size: 22px;
 }
 
 #log span {
