@@ -1,18 +1,14 @@
 
 #info #score {
-  position: relative;
-  display: block;
-  color: #F8FDFF;
-  font-size: 40px;
-  font-weight: bold;
-  width: 33%;
-  height: 100%;
-  margin: 0;
-  line-height: 40px;
-  padding-top: 35px;
-  box-sizing: border-box;
-  float: left;
-  margin-left: 0.5%;
+    position: relative;
+    display: block;
+    color: #F8FDFF;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+    margin-left: 0.5%;
+    flex-grow: 0;
+    width: 19%;
 }
 
 #info #score #score-red {
@@ -24,16 +20,12 @@
 }
 
 #info #turn {
-  position: relative;
-  display: block;
-  width: 33%;
-  height: 100%;
-  margin: 0;
-  font-size: 35px;
-  text-align: center;
-  line-height: 1.2;
-  color: #F8FDFF;
-  float: left;
+    margin: 0;
+    font-size: 32px;
+    text-align: center;
+    color: #F8FDFF;
+    flex-grow: 1;
+    line-height: 36px;
 }
 
 #info .red {
@@ -50,18 +42,14 @@
 }
 
 #info #end-turn {
-  position: absolute;
-  display: block;
-  float: right;
-  margin-right: 0.5%;
-  bottom: 0;
-  right: 0;
-  width: 19%;
-  font-size: 16px;
-  background: #323032;
-  border: 2px solid #F8FDFF;
-  color: #F8FDFF;
-  text-decoration: none;
+    margin-right: 0.5%;
+    width: 19%;
+    font-size: 16px;
+    background: #323032;
+    border: 2px solid #F8FDFF;
+    color: #F8FDFF;
+    text-decoration: none;
+    flex-grow: 0;
 }
 
 #info #end-turn:hover {
@@ -118,17 +106,18 @@
 }
 
 #board .row .tile{
-  position: relative;
-  display: inline-block;
-  width: 19%;
-  height: 150px;
-  margin: 0.5%;
-  padding: 0;
-  box-sizing: border-box;
-  border: 2px solid #F8FDFF;
-  font-size: 25px;
-  background: #F8FDFF;
-  color: #323032;
+    position: relative;
+    display: inline-block;
+    width: 19%;
+    height: 140px;
+    margin: 0.5%;
+    padding: 0;
+    box-sizing: border-box;
+    border: 2px solid #F8FDFF;
+    font-size: 25px;
+    background: #F8FDFF;
+    color: #323032;
+    outline: none;
 }
 
 #board .row .tile:hover{
@@ -166,9 +155,9 @@
 }
 
 #board .flipped.n {
-  background: rgb(211, 191, 175) !important;
-  border-color: rgb(211, 191, 175);
-  color: #F8FDFF;
+    background: rgb(205, 163, 130) !important;
+    border-color: rgb(205, 163, 130);
+    color: #F8FDFF;
 }
 
 #board .flipped.r {
@@ -230,30 +219,39 @@
 }
 
 #toggles .toggle button {
-  width: 50%;
-  margin: 0;
-  font-size: 16px;
-  background: #686c6d;
-  border: 2px solid #686c6d;
-  color: #323032;
-  text-decoration: none;
+    width: 50%;
+    margin: 0;
+    font-size: 16px;
+    background: #323032;
+    border: 2px solid #f8fdff;
+    color: #dcdcdc;
+    text-decoration: none;
+    outline: none;
+}
+
+#toggles .toggle button:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#toggles .toggle button:nth-child(2),
+#toggles .toggle button:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 #toggles .toggle button:hover {
-  background: rgb(139, 139, 139);
+    background: rgb(116, 116, 116);
+    color: #ffffff;
 }
 
 #toggles .toggle button:disabled {
-  background: #323032;
-  border: 2px solid #686c6d;
-  color: #F8FDFF;
-  cursor: default;
-  text-decoration: underline;
-}
-
-#toggles .toggle button:disabled:hover {
-  background: #323032;
-  color: #F8FDFF;
+    background: #f8fdff;
+    border: 2px solid #f8fdff;
+    color: #000000;
+    cursor: default;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 #toggles #player-difficulty {

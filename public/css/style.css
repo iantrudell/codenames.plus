@@ -118,29 +118,23 @@ Grey: #D6D2C9
     overflow: hidden;
   }
 
-  #info {
-    margin: 50px 0 0 !important;
-  }
+    #info {
+        margin: 15px 0 5px !important;
+    }
 
   #info #score {
     font-size: 20px !important;
     padding: 0 0 0 20px !important;
   }
 
-  #info #turn {
-    float: none !important;
-    font-size: 20px !important;
-    text-align: right !important;
-    margin-right: 110px !important;
-    width: auto !important;
-  }
+    #info #turn {
+        font-size: 20px !important;
+        width: auto !important;
+    }
 
-  #info #end-turn {
-    top: 0 !important;
-    bottom: auto !important;
-    width: auto !important;
-    right: 20px !important;
-  }
+    #info #end-turn {
+        width: max-content !important;
+    }
 
   #board {
     overflow: hidden;
@@ -161,11 +155,11 @@ Grey: #D6D2C9
     width: auto !important;
   }
 
-  #toggles .toggle:not(#player-difficulty) {
-    float: none !important;
-    display: inline-block !important;
-    width: auto !important;
-  }
+    #toggles .toggle {
+        float: none !important;
+        display: inline-block !important;
+        width: auto !important;
+    }
 
   #toggles .toggle:not(last-of-type) {
     margin-right: 10px;
@@ -242,18 +236,20 @@ Grey: #D6D2C9
 }
 
 #info {
-  position: relative;
-  width: 100%;
-  height: 70px;
-  margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+    height: 72px;
+    margin: 0 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 body {
-  margin: 0;
-  margin-top: 32px;
-  background: #323032;
-  color: #323032;
-  font-family: 'Changa', sans-serif;
+    margin: 0;
+    background: #323032;
+    color: #323032;
+    font-family: 'Changa', sans-serif;
 }
 
 * {
@@ -286,22 +282,26 @@ body {
 }
 
 #about-window {
-  position: absolute;
-  width: 80%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #F8FDFF;
-  top: 20px;
-  border-radius: 10px;
-  margin-bottom: 200px;
+    position: fixed;
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #F8FDFF;
+    top: 20px;
+    border-radius: 10px;
+    margin: 0 auto 20px;
+    max-height: 93vh;
+    display: flex;
+    flex-direction: column;
 }
 
 #about-window ul {
-  position: relative;
-  list-style: square !important;
-  padding: 50px;
-  padding-top: 0;
-  margin-top: 0;
+    position: relative;
+    list-style: square !important;
+    padding: 50px;
+    padding-top: 0;
+    margin-top: 0;
+    overflow: auto;
 }
 
 #about-window h2 {
@@ -417,29 +417,38 @@ body {
 }
 
 #join-game .join-input {
-  position: relative;
-  display: block;
-  width: 275px;
-  margin: 0 auto;
-  text-align: left;
+    position: relative;
+    display: block;
+    width: 300px;
+    margin: 0 auto 5px;
+    text-align: left;
+    font-size: 16px;
 }
 
-#join-game .join-input input{
-  float: right;
-  line-height: 18px;
+#join-game .join-input input {
+    float: right;
+    line-height: 18px;
+    padding: 3px 5px;
+    font-size: 16px;
+}
+
+#join-game .button-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 0 5px 5px 5px;
 }
 
 #join-game button {
-  position: relative;
-  margin: 1%;
-  border-radius: 3px;
-  border: 2px solid #686c6d;
-  box-sizing: border-box;
-  padding: 4px;
-  width: 48%;
-  font-size: 16px;
-  background: #686c6d;
-  color: #F8FDFF;
+    flex-grow: 1;
+    position: relative;
+    border-radius: 3px;
+    box-sizing: border-box;
+    padding: 4px;
+    font-size: 16px;
+    background: #686c6d;
+    color: #F8FDFF;
+    margin: 5px;
 }
 
 #join-game #join-enter {
@@ -461,10 +470,11 @@ body {
 }
 
 button {
-  cursor: pointer;
-  font-family: 'Changa', sans-serif;
-  border-radius: 3px !important;
-  border-style: solid;
+    cursor: pointer;
+    font-family: 'Changa', sans-serif;
+    border-radius: 3px;
+    border: none;
+    outline: none;
 }
 
 #leave-room {
@@ -482,8 +492,8 @@ button {
 }
 
 #title {
-  text-align: center;
-  padding: 10px;
+    text-align: center;
+    padding: 10px 10px 0;
 }
 
 #title h1 {

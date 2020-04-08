@@ -1,2 +1,2 @@
-# codenames.plus
-nodejs server for multiplayer codenames webapp game
+# codenames
+Node.JS implementation of Codenames
