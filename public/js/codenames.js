@@ -19,6 +19,8 @@ let joinCreate = document.getElementById('join-create')
 ////////////////////////////////////////////////////////////////////////////
 // Divs
 let gameDiv = document.getElementById('game')
+let overallScoreRed = document.getElementById('overall-score-red')
+let overallScoreBlue = document.getElementById('overall-score-blue')
 let clueEntryDiv = document.getElementById('clue-form')
 let boardDiv = document.getElementById('board')
 let aboutWindow = document.getElementById('about-window')
@@ -128,9 +130,9 @@ joinBlue.onclick = () => {
 randomizeTeams.onclick = () => {
     socket.emit('randomizeTeams', {})
 }
-// User Starts New Game
+// User trying to start New Game
 newGame.onclick = () => {
-    socket.emit('newGame', {})
+    socket.emit('newGame', {doubleConfirmed: false})
 }
 clueDeclareButton.onclick = () => {
     socket.emit('declareClue', { word: clueWord.value, count: clueCount.value })
@@ -270,9 +272,11 @@ socket.on('timerUpdate', (data) => {        // Server update client timer
 })
 
 socket.on('newGameResponse', (data) => {    // Response to New Game
-    if (data.success) {
-        wipeBoard();
-    }
+  if (data.success){
+    wipeBoard();
+  } else if (confirm("Are you sure you want to start a new game?")){
+    socket.emit('newGame', {doubleConfirmed: true})
+  }
 })
 
 socket.on('afkWarning', () => {    // Response to Afk Warning
@@ -309,17 +313,17 @@ socket.on('switchRoleResponse', (data) => {  // Response to Switching Role
     }
 })
 
-socket.on('gameState', (data) => {           // Response to gamestate update
-    if (data.difficulty !== difficulty) {  // Update the clients difficulty
-        difficulty = data.difficulty
-        wipeBoard();                        // Update the appearance of the tiles
-    }
-    mode = data.mode                      // Update the clients game mode
-    consensus = data.consensus            // Update the clients consensus mode
-    updateInfo(data.game, data.team)      // Update the games turn information
-    updateTimerSlider(data.game, data.mode)          // Update the games timer slider
-    updatePacks(data.game)                // Update the games pack information
-    updatePlayerlist(data.players)        // Update the player list for the room
+socket.on('gameState', (data) =>{           // Response to gamestate update
+  if (data.difficulty !== difficulty){  // Update the clients difficulty
+    difficulty = data.difficulty
+    wipeBoard();                        // Update the appearance of the tiles
+  }
+  mode = data.mode                      // Update the clients game mode
+  consensus = data.consensus            // Update the clients consensus mode
+  updateInfo(data.game, data.team, data.overallScoreRed, data.overallScoreBlue)     // Update the games turn information
+  updateTimerSlider(data.game, data.mode)          // Update the games timer slider
+  updatePacks(data.game)                // Update the games pack information
+  updatePlayerlist(data.players)        // Update the player list for the room
 
     proposals = []
     for (let i in data.players) {
@@ -350,27 +354,29 @@ function wipeBoard() {
 }
 
 // Update the game info displayed to the client
-function updateInfo(game, team) {
-    scoreBlue.innerHTML = game.blue                         // Update the blue tiles left
-    scoreRed.innerHTML = game.red                           // Update the red tiles left
-    turnMessage.innerHTML = game.turn + "'s turn"           // Update the turn msg
-    turnMessage.className = game.turn                       // Change color of turn msg
-    if (game.over) {                                         // Display winner
-        turnMessage.innerHTML = game.winner + " wins!"
-        turnMessage.className = game.winner
-    }
-    if (team !== game.turn) endTurn.disabled = true         // Disable end turn button for opposite team
-    else endTurn.disabled = false
-    if (playerRole === 'spymaster') {
-        endTurn.disabled = true // Disable end turn button for spymasters
-    }
-    clueEntryDiv.style.display = playerRole === 'spymaster' && game.clue === null && team === game.turn ? '' : 'none'
-    if (game.over || game.clue === null) {
-        clueDisplay.innerText = ''
-    }
-    else {
-        clueDisplay.innerText = game.clue.word + " (" + (game.clue.count === 'unlimited' ? '∞' : game.clue.count) + ")"
-    }
+function updateInfo(game, team, roomScoreRed, roomScoreBlue){
+  scoreBlue.innerHTML = game.blue                         // Update the blue tiles left
+  scoreRed.innerHTML = game.red                           // Update the red tiles left
+  overallScoreRed.innerHTML=roomScoreRed
+  overallScoreBlue.innerHTML=roomScoreBlue
+  turnMessage.innerHTML = game.turn + "'s turn"           // Update the turn msg
+  turnMessage.className = game.turn                       // Change color of turn msg
+  if (game.over){                                         // Display winner
+    turnMessage.innerHTML = game.winner + " wins!"
+    turnMessage.className = game.winner
+  }
+  if (team !== game.turn) endTurn.disabled = true         // Disable end turn button for opposite team
+  else endTurn.disabled = false
+  if (playerRole === 'spymaster') {
+    endTurn.disabled = true // Disable end turn button for spymasters
+  }
+  clueEntryDiv.style.display = playerRole === 'spymaster' && game.clue === null && team === game.turn ? '' : 'none'
+  if (game.over || game.clue === null){
+    clueDisplay.innerText = ''
+  }
+  else {
+    clueDisplay.innerText = game.clue.word + " (" + (game.clue.count === 'unlimited' ? '∞' : game.clue.count) + ")"
+  }
 }
 
 // Update the clients timer slider

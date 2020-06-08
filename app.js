@@ -6,6 +6,7 @@ let express = require('express')
 
 // Create app
 let app = express()
+app.disable('x-powered-by');
 
 //Set up server
 let server = app.listen(process.env.PORT || 2000, listen);
@@ -77,7 +78,8 @@ class Room {
     this.difficulty = 'normal'
     this.mode = 'casual'
     this.consensus = 'single'
-
+    this.overallScoreRed = 0
+    this.overallScoreBlue = 0
     // Add room to room list
     ROOM_LIST[this.room] = this
   }
@@ -173,7 +175,7 @@ io.sockets.on('connection', function(socket){
   socket.on('randomizeTeams', () => {randomizeTeams(socket)})
 
   // New Game. Called when client starts a new game
-  socket.on('newGame', () =>{newGame(socket)})
+  socket.on('newGame', (data) =>{newGame(socket, data)})
 
   // Switch Role. Called when client switches to spymaster / guesser
   // Data: New role
@@ -406,19 +408,23 @@ function randomizeTeams(socket){
 
 // New game function
 // Gets client that requested the new game and instantiates a new game board for the room
-function newGame(socket){
+function newGame(socket, data){
   if (!PLAYER_LIST[socket.id]) return // Prevent Crash
   let room = PLAYER_LIST[socket.id].room  // Get the room that the client called from
-  ROOM_LIST[room].game.init();      // Make a new game for that room
+  if(ROOM_LIST[room].game.over || data.doubleConfirmed) { //Start new game if either the game is over or the clicker has double confirmed
+    ROOM_LIST[room].game.init();      // Make a new game for that room
 
-  // Make everyone in the room a guesser and tell their client the game is new
-  for(let player in ROOM_LIST[room].players){
-    PLAYER_LIST[player].role = 'guesser';
-    PLAYER_LIST[player].guessProposal = null;
-    SOCKET_LIST[player].emit('switchRoleResponse', {success:true, role:'guesser'})
-    SOCKET_LIST[player].emit('newGameResponse', {success:true})
+    // Make everyone in the room a guesser and tell their client the game is new
+    for (let player in ROOM_LIST[room].players) {
+      PLAYER_LIST[player].role = 'guesser';
+      PLAYER_LIST[player].guessProposal = null;
+      SOCKET_LIST[player].emit('switchRoleResponse', {success: true, role: 'guesser'})
+      SOCKET_LIST[player].emit('newGameResponse', {success: true})
+    }
+    gameUpdate(room) // Update everyone in the room
+  } else {
+    socket.emit('newGameResponse', {success: false})
   }
-  gameUpdate(room) // Update everyone in the room
 }
 
 // Switch role function
@@ -430,6 +436,13 @@ function switchRole(socket, data){
 
   if (currentPlayer.team === 'undecided'){
     // Dissallow the client a role switch if they're not on a team
+    socket.emit('switchRoleResponse', {success:false})
+    return
+  }
+
+  if (currentPlayer.role === 'spymaster'){
+    // Dissallow the client a role switch if they're already spymaster
+    //   so they've seen the answers.
     socket.emit('switchRoleResponse', {success:false})
     return
   }
@@ -481,6 +494,9 @@ function clickTile(socket, data){
           ROOM_LIST[room].game.flipTile(data.i, data.j) // Send the flipped tile info to the game
           clearGuessProsposals(room)
         }
+        if(ROOM_LIST[room].game.over){
+          updateOverallScores(room);
+        }
         gameUpdate(room)  // Update everyone in the room
       }
     }
@@ -511,6 +527,14 @@ function clearGuessProsposals(room){
   }
 }
 
+function updateOverallScores(room) {
+  if (ROOM_LIST[room].game.winner === 'red') {
+    ROOM_LIST[room].overallScoreRed = ROOM_LIST[room].overallScoreRed + 1
+  } else if (ROOM_LIST[room].game.winner === 'blue') {
+    ROOM_LIST[room].overallScoreBlue = ROOM_LIST[room].overallScoreBlue + 1
+  }
+}
+
 // Update the gamestate for every client in the room that is passed to this function
 function gameUpdate(room){
   // Create data package to send to the client
@@ -518,6 +542,8 @@ function gameUpdate(room){
     room: room,
     players:ROOM_LIST[room].players,
     game:ROOM_LIST[room].game,
+    overallScoreRed:ROOM_LIST[room].overallScoreRed,
+    overallScoreBlue:ROOM_LIST[room].overallScoreBlue,
     difficulty:ROOM_LIST[room].difficulty,
     mode:ROOM_LIST[room].mode,
     consensus:ROOM_LIST[room].consensus
