@@ -91,16 +91,44 @@
 </head>
 
 <body>
-	<p id='donate'>
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-		<input type="hidden" name="cmd" value="_donations" />
-		<input type="hidden" name="business" value="MB4KFJHDDXC4W" />
-		<input type="hidden" name="item_name" value="Codenames Hosting" />
-		<input type="hidden" name="currency_code" value="USD" />
-		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-		<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-	</form> 
-    <a id='donate-hide'>[hide]</a></p>
+    <div id='donate'>
+        <form action="https://www.paypal.com/cgi-bin/webscr"
+            method="post"
+            target="_top">
+            <input type="hidden"
+                name="cmd"
+                value="_donations">
+            <input type="hidden"
+                name="business"
+                value="admin@gamerush.gg">
+            <input type="hidden"
+                name="lc"
+                value="US">
+            <input type="hidden"
+                name="item_name"
+                value="Codenames Hosting">
+            <input type="hidden"
+                name="button_subtype"
+                value="services">
+            <input type="hidden"
+                name="currency_code"
+                value="USD">
+            <input type="hidden"
+                name="bn"
+                value="PP-BuyNowBF:donate.png:NonHosted">
+            <input type="image"
+                src="/img/btn_donate_LG.gif"
+                border="0"
+                name="submit"
+                alt="PayPal - The safer, easier way to pay online!">
+            <img alt=""
+                border="0"
+                src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
+                width="1"
+                height="1">
+        </form>
+        <a id='donate-hide'>[hide]</a>
+    </div>
     <span id='server-stats'
         style='display: none'></span>
     <button id='about-button'
@@ -189,10 +217,10 @@
         <div id="content">
             <div id="left">
                 <div id="players">
-            		<h2>Room Board</h2>
+                    <h2>Room Board</h2>
                     <div id='panel'>
-              			<div id='overall-score-red'></div>
-              			<div id='overall-score-blue'></div>
+                        <div id='overall-score-red'></div>
+                        <div id='overall-score-blue'></div>
                         <button id='join-red'>Join Red</button>
                         <button id='join-blue'>Join Blue</button>
                         <ul id="red-team"></ul>
@@ -317,7 +345,8 @@
                     </div>
                 </div>
                 <div id="toggles">
-          			<div class='toggle' title='To switch from Spymaster to Guesser, start a new game.'>
+                    <div class='toggle'
+                        title='To switch from Spymaster to Guesser, start a new game.'>
                         <button id='role-guesser'
                             disabled>Guesser</button>
                         <button id='role-spymaster'>Spymaster</button>
